@@ -37,7 +37,7 @@ This system reduces manual errors, speeds up order processing, ensures accurate 
 -> Composition → Order contains multiple OrderItem objects; Bill is generated from Order.
 
 
-UML Diagram
+✏️UML Diagram
 
 <img width="1848" height="811" alt="Screenshot 2025-08-26 144341" src="https://github.com/user-attachments/assets/435610e7-5a02-4eb7-8458-72a6e2047ca4" />
 
