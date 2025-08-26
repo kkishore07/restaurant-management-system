@@ -22,3 +22,22 @@ This system reduces manual errors, speeds up order processing, ensures accurate 
 ✅ Database-backed storage for reliability and consistency
 
 ✅ Reports on daily/monthly sales
+
+
+🔗OOP Concepts Used
+
+-> Encapsulation → Classes like Order, MenuItem, and Bill encapsulate fields and expose controlled methods.
+
+-> Inheritance → Customer and Staff inherit from the User class.
+
+-> Polymorphism → Methods like login() or viewDetails() behave differently for admin, customer, and staff.
+
+-> Abstraction → DAO (Data Access Object) classes abstract database operations.
+
+-> Composition → Order contains multiple OrderItem objects; Bill is generated from Order.
+
+
+UML Diagram
+
+<img width="1848" height="811" alt="Screenshot 2025-08-26 144341" src="https://github.com/user-attachments/assets/435610e7-5a02-4eb7-8458-72a6e2047ca4" />
+
