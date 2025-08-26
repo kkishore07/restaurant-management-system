@@ -8,3 +8,12 @@ The Restaurant Management System (RMS) is a Java-based application with DBMS int
 By applying Object-Oriented Programming (OOP) principles such as encapsulation, inheritance, and polymorphism, the project ensures a modular and reusable design. The use of a MongoDB as databse ,which provides reliable data storage for orders, customers, bills, and staff records.
 
 This system reduces manual errors, speeds up order processing, ensures accurate billing, and improves customer experience. It also serves as a practical demonstration of combining Java programming with database management for real-world applications.
+
+⚙️ Features
+
+✅ Admin can add, update, delete menu items
+✅ Customers can browse menu and place orders
+✅ System generates bills automatically (with tax/discount)
+✅ Staff can update order status (Pending, Preparing, Completed, Delivered)
+✅ Database-backed storage for reliability and consistency
+✅ Reports on daily/monthly sales
