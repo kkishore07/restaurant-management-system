@@ -12,8 +12,13 @@ This system reduces manual errors, speeds up order processing, ensures accurate 
 ⚙️ Features
 
 ✅ Admin can add, update, delete menu items
+
 ✅ Customers can browse menu and place orders
+
 ✅ System generates bills automatically (with tax/discount)
+
 ✅ Staff can update order status (Pending, Preparing, Completed, Delivered)
+
 ✅ Database-backed storage for reliability and consistency
+
 ✅ Reports on daily/monthly sales
