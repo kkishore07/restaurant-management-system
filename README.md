@@ -32,7 +32,7 @@ This system reduces manual errors, speeds up order processing, ensures accurate 
 
 -> Polymorphism → Methods like login() or viewDetails() behave differently for admin, customer, and staff.
 
--> Abstraction → DAO (Data Access Object) classes abstract database operations.
+-> Abstraction → DAO (Data Access Object) classes abstract database operations.(eg.billing,processing payment)
 
 -> Composition → Order contains multiple OrderItem objects; Bill is generated from Order.
 
