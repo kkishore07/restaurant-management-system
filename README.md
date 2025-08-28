@@ -39,5 +39,5 @@ This system reduces manual errors, speeds up order processing, ensures accurate 
 
 ✏️UML Diagram
 
-<img width="1848" height="811" alt="Screenshot 2025-08-26 144341" src="https://github.com/user-attachments/assets/435610e7-5a02-4eb7-8458-72a6e2047ca4" />
+<img width="1766" height="608" alt="Screenshot 2025-08-27 225434" src="https://github.com/user-attachments/assets/a23a383d-1ad5-4ddb-a36e-e69ac7a95e7e" />
 
