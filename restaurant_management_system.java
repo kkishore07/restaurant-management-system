@@ -66,11 +66,13 @@ public class restaurant_management_system {
 
                 case "Admin" -> {
                     System.out.println("1. Display Menu");
-                    System.out.println("2. Exit");
+                    System.out.println("2. Add Menu Item");
+                    System.out.println("3. Exit");
                     System.out.print("Choose an option : ");
                     int choice = sc.nextInt();
                     if (choice == 1) rms.displayMenu();
-                    else if (choice == 2) running = false;
+                    else if (choice == 2) rms.addMenuItem(sc);
+                    else if (choice == 3) running = false;
                     else System.out.println("Invalid choice.");
                 }
 
@@ -142,8 +144,19 @@ class Order {
 
 
 class RestaurantManagementSystem {
+    
+    
     List<MenuItem> menu = new ArrayList<>();
     List<Order> orders = new ArrayList<>();
+    
+    void addMenuItem(Scanner sc) {
+        System.out.print("Enter new item name: ");
+        String name = sc.next();
+        System.out.print("Enter price: ");
+        double price = sc.nextDouble();
+        menu.add(new MenuItem(name, price));
+        System.out.println("Menu item added.");
+    }
 
     void loadMenu(String filename) {
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
