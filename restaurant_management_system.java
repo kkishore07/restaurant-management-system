@@ -40,3 +40,23 @@ class MenuItem {
     }
 }
 
+class Order {
+    List<MenuItem> items = new ArrayList<>();
+    double total = 0.0;
+
+    void addItem(MenuItem item) {
+        items.add(item);
+        total += item.price;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (MenuItem item : items) {
+            sb.append(item.name).append(" - ").append(String.format("%.2f", item.price)).append("\n");
+        }
+        sb.append("Total: ").append(String.format("%.2f", total));
+        return sb.toString();
+    }
+}
+
