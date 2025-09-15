@@ -5,33 +5,54 @@ import java.util.*;
 
 public class restaurant_management_system {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         RestaurantManagementSystem rms = new RestaurantManagementSystem();
         rms.loadMenu("menu.txt");
 
         
         List<User> users = new ArrayList<>();
         users.add(new Admin("admin", "admin123"));
-        users.add(new Customer("customer", "custo123"));
+        users.add(new Customer("customer", ""));
         users.add(new Staff("staff", "staff123"));
 
         System.out.println("Welcome to Restaurant Management System");
-        System.out.print("Enter username: ");
-        String username = scanner.next();
-        System.out.print("Enter password: ");
-        String password = scanner.next();
-
+        System.out.println("Select role:");
+        System.out.println("1. Admin");
+        System.out.println("2. Customer");
+        System.out.println("3. Staff");
+        System.out.print("Enter choice: ");
+        int roleChoice = sc.nextInt();
         User loggedInUser = null;
-        for (User user : users) {
-            if (user.username.equals(username) && user.password.equals(password)) {
-                loggedInUser = user;
-                break;
+        switch (roleChoice) {
+            case 1 -> {
+                System.out.print("Enter admin username: ");
+                String username = sc.next();
+                System.out.print("Enter admin password: ");
+                String password = sc.next();
+                if (username.equals("admin") && password.equals("admin123")) {
+                    loggedInUser = new Admin(username, password);
+                }
             }
+            case 2 -> {
+                System.out.print("Enter your name: ");
+                String name = sc.next();
+                loggedInUser = new Customer(name,""); // No password needed
+            }
+            case 3 -> {
+                System.out.print("Enter staff username: ");
+                String username = sc.next();
+                System.out.print("Enter staff password: ");
+                String password = sc.next();
+                if (username.equals("staff") && password.equals("staff123")) {
+                    loggedInUser = new Staff(username, password);
+                }
+            }
+            default -> System.out.println("Invalid role selection.");
         }
 
         if (loggedInUser == null) {
-            System.out.println("Invalid credentials. Exiting...");
-            scanner.close();
+            System.out.println("Invalid credentials or role. Exiting...");
+            sc.close();
             return;
         }
 
@@ -47,7 +68,7 @@ public class restaurant_management_system {
                     System.out.println("1. Display Menu");
                     System.out.println("2. Exit");
                     System.out.print("Choose an option : ");
-                    int choice = scanner.nextInt();
+                    int choice = sc.nextInt();
                     if (choice == 1) rms.displayMenu();
                     else if (choice == 2) running = false;
                     else System.out.println("Invalid choice.");
@@ -59,9 +80,9 @@ public class restaurant_management_system {
                     System.out.println("3. View Orders");
                     System.out.println("4. Exit");
                     System.out.print("Choose an option: ");
-                    int choice = scanner.nextInt();
+                    int choice = sc.nextInt();
                     if (choice == 1) rms.displayMenu();
-                    else if (choice == 2) rms.placeOrder(scanner);
+                    else if (choice == 2) rms.placeOrder(sc);
                     else if (choice == 3) rms.viewOrders();
                     else if (choice == 4) running = false;
                     else System.out.println("Invalid choice.");
@@ -71,7 +92,7 @@ public class restaurant_management_system {
                     System.out.println("1. View Orders");
                     System.out.println("2. Exit");
                     System.out.print("Choose an option: ");
-                    int choice = scanner.nextInt();
+                    int choice = sc.nextInt();
                     if (choice == 1) rms.viewOrders();
                     else if (choice == 2) running = false;
                     else System.out.println("Invalid choice.");
@@ -79,7 +100,7 @@ public class restaurant_management_system {
             }
         }
         System.out.println("Exiting...");
-        scanner.close();
+        sc.close();
     }
 }
 
