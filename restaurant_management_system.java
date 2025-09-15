@@ -12,7 +12,7 @@ public class restaurant_management_system {
         
         List<User> users = new ArrayList<>();
         users.add(new Admin("admin", "admin123"));
-        users.add(new Customer("customer", "cust123"));
+        users.add(new Customer("customer", "custo123"));
         users.add(new Staff("staff", "staff123"));
 
         System.out.println("Welcome to Restaurant Management System");
