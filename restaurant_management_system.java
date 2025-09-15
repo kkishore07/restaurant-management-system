@@ -9,27 +9,77 @@ public class restaurant_management_system {
         RestaurantManagementSystem rms = new RestaurantManagementSystem();
         rms.loadMenu("menu.txt");
 
-        while (true) {
-            System.out.println("\nRestaurant Management System");
-            System.out.println("1. Display Menu");
-            System.out.println("2. Place Order");
-            System.out.println("3. View Orders");
-            System.out.println("4. Exit");
-            System.out.print("Choose an option: ");
-            int choice = scanner.nextInt();
+        
+        List<User> users = new ArrayList<>();
+        users.add(new Admin("admin", "admin123"));
+        users.add(new Customer("customer", "cust123"));
+        users.add(new Staff("staff", "staff123"));
 
-            switch (choice) {
-                case 1 -> rms.displayMenu();
-                case 2 -> rms.placeOrder(scanner);
-                case 3 -> rms.viewOrders();
-                case 4 -> {
-                    System.out.println("Exiting...");
-                    scanner.close();
-                    return;
-                }
-                default -> System.out.println("Invalid choice. Please try again.");
+        System.out.println("Welcome to Restaurant Management System");
+        System.out.print("Enter username: ");
+        String username = scanner.next();
+        System.out.print("Enter password: ");
+        String password = scanner.next();
+
+        User loggedInUser = null;
+        for (User user : users) {
+            if (user.username.equals(username) && user.password.equals(password)) {
+                loggedInUser = user;
+                break;
             }
         }
+
+        if (loggedInUser == null) {
+            System.out.println("Invalid credentials. Exiting...");
+            scanner.close();
+            return;
+        }
+
+        System.out.println("Login successful! Role: " + loggedInUser.getRole());
+
+        
+        boolean running = true;
+        while (running) {
+            System.out.println("\n--- " + loggedInUser.getRole() + " Menu ---");
+            switch (loggedInUser.getRole()) {
+
+                case "Admin" -> {
+                    System.out.println("1. Display Menu");
+                    System.out.println("2. Exit");
+                    System.out.print("Choose an option: ");
+                    int choice = scanner.nextInt();
+                    if (choice == 1) rms.displayMenu();
+                    else if (choice == 2) running = false;
+                    else System.out.println("Invalid choice.");
+                }
+
+                case "Customer" -> {
+                    System.out.println("1. Display Menu");
+                    System.out.println("2. Place Order");
+                    System.out.println("3. View Orders");
+                    System.out.println("4. Exit");
+                    System.out.print("Choose an option: ");
+                    int choice = scanner.nextInt();
+                    if (choice == 1) rms.displayMenu();
+                    else if (choice == 2) rms.placeOrder(scanner);
+                    else if (choice == 3) rms.viewOrders();
+                    else if (choice == 4) running = false;
+                    else System.out.println("Invalid choice.");
+                }
+
+                case "Staff" -> {
+                    System.out.println("1. View Orders");
+                    System.out.println("2. Exit");
+                    System.out.print("Choose an option: ");
+                    int choice = scanner.nextInt();
+                    if (choice == 1) rms.viewOrders();
+                    else if (choice == 2) running = false;
+                    else System.out.println("Invalid choice.");
+                }
+            }
+        }
+        System.out.println("Exiting...");
+        scanner.close();
     }
 }
 
@@ -46,10 +96,15 @@ class MenuItem {
 class Order {
     List<MenuItem> items = new ArrayList<>();
     double total = 0.0;
+    String status = "Pending"; // Order status
 
     void addItem(MenuItem item) {
         items.add(item);
         total += item.price;
+    }
+
+    void setStatus(String status) {
+        this.status = status;
     }
 
     @Override
@@ -58,7 +113,8 @@ class Order {
         for (MenuItem item : items) {
             sb.append(item.name).append(" - ").append(String.format("%.2f", item.price)).append("\n");
         }
-        sb.append("Total: ").append(String.format("%.2f", total));
+        sb.append("Total: ").append(String.format("%.2f", total)).append("\n");
+        sb.append("Status: ").append(status);
         return sb.toString();
     }
 }
@@ -130,6 +186,56 @@ void placeOrder(Scanner scanner) {
         }
     }
 }
+
+abstract class User {
+    String username;
+    String password;
+
+    User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    abstract String getRole();
+}
+
+// Admin subclass
+class Admin extends User {
+    Admin(String username, String password) {
+        super(username, password);
+    }
+
+    @Override
+    String getRole() {
+        return "Admin";
+    }
+}
+
+// Customer subclass
+class Customer extends User {
+    Customer(String username, String password) {
+        super(username, password);
+    }
+
+    @Override
+    String getRole() {
+        return "Customer";
+    }
+}
+
+// Staff subclass
+class Staff extends User {
+    Staff(String username, String password) {
+        super(username, password);
+    }
+
+    @Override
+    String getRole() {
+        return "Staff";
+    }
+}
+
+
 
 
 
