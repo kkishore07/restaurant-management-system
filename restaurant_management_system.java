@@ -95,5 +95,42 @@ class RestaurantManagementSystem {
             System.out.printf("%d. %s - %.2f\n", i + 1, item.name, item.price);
         }
     }
+void placeOrder(Scanner scanner) {
+        Order order = new Order();
+        while (true) {
+            displayMenu();
+            System.out.print("Enter item number to add to order (0 to finish): ");
+            int itemNum = scanner.nextInt();
+            if (itemNum == 0) break;
+            if (itemNum < 1 || itemNum > menu.size()) {
+                System.out.println("Invalid item number.");
+                continue;
+            }
+            order.addItem(menu.get(itemNum - 1));
+            System.out.println("Item added.");
+        }
+        if (!order.items.isEmpty()) {
+            orders.add(order);
+            System.out.println("Order placed:\n" + order);
+        } else {
+            System.out.println("No items ordered.");
+        }
+    }
 
+    void viewOrders() {
+        if (orders.isEmpty()) {
+            System.out.println("No orders placed yet.");
+            return;
+        }
+        System.out.println("\nOrders:");
+        for (int i = 0; i < orders.size(); i++) {
+            System.out.println("Order #" + (i + 1));
+            System.out.println(orders.get(i));
+            System.out.println();
+        }
+    }
 }
+
+
+
+
