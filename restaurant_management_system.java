@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 
 public class restaurant_management_system {
@@ -60,3 +63,37 @@ class Order {
     }
 }
 
+
+class RestaurantManagementSystem {
+    List<MenuItem> menu = new ArrayList<>();
+    List<Order> orders = new ArrayList<>();
+
+    void loadMenu(String filename) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts.length == 2) {
+                    String name = parts[0].trim();
+                    double price = Double.parseDouble(parts[1].trim());
+                    menu.add(new MenuItem(name, price));
+                }
+            }
+        } catch (IOException e) {
+                System.out.println("Menu file not found. Using default menu.");
+                menu.add(new MenuItem("Idly", 30.0));
+                menu.add(new MenuItem("Dosa", 40.0));
+                menu.add(new MenuItem("Chapathi", 35.0));
+                menu.add(new MenuItem("Parotta", 45.0));
+        }
+    }
+
+    void displayMenu() {
+        System.out.println("\nMenu:");
+        for (int i = 0; i < menu.size(); i++) {
+            MenuItem item = menu.get(i);
+            System.out.printf("%d. %s - %.2f\n", i + 1, item.name, item.price);
+        }
+    }
+
+}
