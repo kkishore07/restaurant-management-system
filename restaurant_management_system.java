@@ -46,7 +46,7 @@ public class restaurant_management_system {
                 case "Admin" -> {
                     System.out.println("1. Display Menu");
                     System.out.println("2. Exit");
-                    System.out.print("Choose an option: ");
+                    System.out.print("Choose an option : ");
                     int choice = scanner.nextInt();
                     if (choice == 1) rms.displayMenu();
                     else if (choice == 2) running = false;
