@@ -66,7 +66,7 @@ public class restaurant_management_system {
 
                 case "Admin" -> {
                     System.out.println("1. Display Menu");
-                    System.out.println("2. Add Menu Item");
+                    System.out.println("2. Add Menu Item ");
                     System.out.println("3. Exit");
                     System.out.print("Choose an option : ");
                     int choice = sc.nextInt();
