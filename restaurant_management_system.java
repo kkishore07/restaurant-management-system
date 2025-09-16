@@ -5,12 +5,14 @@ import java.util.*;
 
 public class restaurant_management_system {
     public static void main(String[] args) {
+       
         Scanner sc = new Scanner(System.in);
         RestaurantManagementSystem rms = new RestaurantManagementSystem();
         rms.loadMenu("menu.txt");
 
         
         List<User> users = new ArrayList<>();
+       
         users.add(new Admin("admin", "admin123"));
         users.add(new Customer("customer", ""));
         users.add(new Staff("staff", "staff123"));
@@ -21,14 +23,17 @@ public class restaurant_management_system {
         System.out.println("2. Customer");
         System.out.println("3. Staff");
         System.out.print("Enter choice: ");
+        
         int roleChoice = sc.nextInt();
         User loggedInUser = null;
+       
         switch (roleChoice) {
             case 1 -> {
                 System.out.print("Enter admin username: ");
                 String username = sc.next();
                 System.out.print("Enter admin password: ");
                 String password = sc.next();
+                
                 if (username.equals("admin") && password.equals("admin123")) {
                     loggedInUser = new Admin(username, password);
                 }
@@ -43,6 +48,7 @@ public class restaurant_management_system {
                 String username = sc.next();
                 System.out.print("Enter staff password: ");
                 String password = sc.next();
+                
                 if (username.equals("staff") && password.equals("staff123")) {
                     loggedInUser = new Staff(username, password);
                 }
@@ -71,7 +77,9 @@ public class restaurant_management_system {
                     System.out.println("4. Delete Menu Item");
                     System.out.println("5. Exit");
                     System.out.print("Choose an option : ");
+                    
                     int choice = sc.nextInt();
+
                     if (choice == 1) rms.displayMenu();
                     else if (choice == 2) rms.addMenuItem(sc);
                     else if (choice == 3) rms.updateMenuItem(sc);
@@ -86,7 +94,9 @@ public class restaurant_management_system {
                     System.out.println("3. View Orders");
                     System.out.println("4. Exit");
                     System.out.print("Choose an option: ");
+                    
                     int choice = sc.nextInt();
+
                     if (choice == 1) rms.displayMenu();
                     else if (choice == 2) rms.placeOrder(sc);
                     else if (choice == 3) rms.viewOrders();
@@ -98,7 +108,9 @@ public class restaurant_management_system {
                     System.out.println("1. View Orders");
                     System.out.println("2. Exit");
                     System.out.print("Choose an option: ");
+                    
                     int choice = sc.nextInt();
+                    
                     if (choice == 1) rms.viewOrders();
                     else if (choice == 2) running = false;
                     else System.out.println("Invalid choice.");
