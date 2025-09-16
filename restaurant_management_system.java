@@ -149,9 +149,11 @@ class Order {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
+       
         for (MenuItem item : items) {
             sb.append(item.name).append(" - ").append(String.format("%.2f", item.price)).append("\n");
         }
+        
         sb.append("Total: ").append(String.format("%.2f", total)).append("\n");
         sb.append("Status: ").append(status);
         return sb.toString();
@@ -161,16 +163,16 @@ class Order {
 
 class RestaurantManagementSystem {
     
-    
-  
     List<MenuItem> menu = new ArrayList<>();
     List<Order> orders = new ArrayList<>();
     
     void addMenuItem(Scanner sc) {
         System.out.print("Enter new item name: ");
         String name = sc.next();
+        
         System.out.print("Enter price: ");
         double price = sc.nextDouble();
+        
         menu.add(new MenuItem(name, price));
         System.out.println("Menu item added.");
     }
@@ -203,28 +205,28 @@ class RestaurantManagementSystem {
         }
     }
     
-    void updateMenuItem(Scanner scanner) {
+    void updateMenuItem(Scanner sc) {
         displayMenu();
         System.out.print("Enter item number to update: ");
-        int idx = scanner.nextInt();
+        int idx = sc.nextInt();
         if (idx < 1 || idx > menu.size()) {
             System.out.println("Invalid item number.");
             return;
         }
         MenuItem item = menu.get(idx - 1);
         System.out.print("Enter new name (current: " + item.name + "): ");
-        String name = scanner.next();
+        String name = sc.next();
         System.out.print("Enter new price (current: " + item.price + "): ");
-        double price = scanner.nextDouble();
+        double price = sc.nextDouble();
         item.name = name;
         item.price = price;
         System.out.println("Menu item updated.");
     }
     
-    void deleteMenuItem(Scanner scanner) {
+    void deleteMenuItem(Scanner sc) {
         displayMenu();
         System.out.print("Enter item number to delete: ");
-        int idx = scanner.nextInt();
+        int idx = sc.nextInt();
         if (idx < 1 || idx > menu.size()) {
             System.out.println("Invalid item number.");
             return;
@@ -233,12 +235,12 @@ class RestaurantManagementSystem {
         System.out.println("Menu item deleted.");
     }
     
-    void placeOrder(Scanner scanner) {
+    void placeOrder(Scanner sc) {
         Order order = new Order();
         while (true) {
             displayMenu();
             System.out.print("Enter item number to add to order (0 to finish): ");
-            int itemNum = scanner.nextInt();
+            int itemNum = sc.nextInt();
             if (itemNum == 0) break;
             if (itemNum < 1 || itemNum > menu.size()) {
                 System.out.println("Invalid item number.");
