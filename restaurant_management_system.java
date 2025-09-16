@@ -146,26 +146,7 @@ class Order {
 
 
 class RestaurantManagementSystem {
-    // Feature: Update Menu Item for Admin
-    void updateMenuItem(Scanner scanner) {
-        displayMenu();
-        System.out.print("Enter item number to update: ");
-        int idx = scanner.nextInt();
-        if (idx < 1 || idx > menu.size()) {
-            System.out.println("Invalid item number.");
-            return;
-        }
-        MenuItem item = menu.get(idx - 1);
-        System.out.print("Enter new name (current: " + item.name + "): ");
-        String name = scanner.next();
-        System.out.print("Enter new price (current: " + item.price + "): ");
-        double price = scanner.nextDouble();
-        item.name = name;
-        item.price = price;
-        System.out.println("Menu item updated.");
-    }
-    
-    
+  
     List<MenuItem> menu = new ArrayList<>();
     List<Order> orders = new ArrayList<>();
     
@@ -204,6 +185,24 @@ class RestaurantManagementSystem {
             MenuItem item = menu.get(i);
             System.out.printf("%d. %s - %.2f\n", i + 1, item.name, item.price);
         }
+    }
+    
+    void updateMenuItem(Scanner scanner) {
+        displayMenu();
+        System.out.print("Enter item number to update: ");
+        int idx = scanner.nextInt();
+        if (idx < 1 || idx > menu.size()) {
+            System.out.println("Invalid item number.");
+            return;
+        }
+        MenuItem item = menu.get(idx - 1);
+        System.out.print("Enter new name (current: " + item.name + "): ");
+        String name = scanner.next();
+        System.out.print("Enter new price (current: " + item.price + "): ");
+        double price = scanner.nextDouble();
+        item.name = name;
+        item.price = price;
+        System.out.println("Menu item updated.");
     }
 void placeOrder(Scanner scanner) {
         Order order = new Order();
