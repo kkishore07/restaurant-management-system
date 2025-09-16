@@ -67,14 +67,16 @@ public class restaurant_management_system {
                 case "Admin" -> {
                     System.out.println("1. Display Menu");
                     System.out.println("2. Add Menu Item");
-                    System.out.println("3. Update Menu Item ");
-                    System.out.println("4. Exit");
+                    System.out.println("3. Update Menu Item");
+                    System.out.println("4. Delete Menu Item");
+                    System.out.println("5. Exit");
                     System.out.print("Choose an option : ");
                     int choice = sc.nextInt();
                     if (choice == 1) rms.displayMenu();
                     else if (choice == 2) rms.addMenuItem(sc);
                     else if (choice == 3) rms.updateMenuItem(sc);
-                    else if (choice == 4) running = false;
+                    else if (choice == 4) rms.deleteMenuItem(sc);
+                    else if (choice == 5) running = false;
                     else System.out.println("Invalid choice.");
                 }
 
@@ -146,6 +148,8 @@ class Order {
 
 
 class RestaurantManagementSystem {
+    
+    
   
     List<MenuItem> menu = new ArrayList<>();
     List<Order> orders = new ArrayList<>();
@@ -204,7 +208,20 @@ class RestaurantManagementSystem {
         item.price = price;
         System.out.println("Menu item updated.");
     }
-void placeOrder(Scanner scanner) {
+    
+    void deleteMenuItem(Scanner scanner) {
+        displayMenu();
+        System.out.print("Enter item number to delete: ");
+        int idx = scanner.nextInt();
+        if (idx < 1 || idx > menu.size()) {
+            System.out.println("Invalid item number.");
+            return;
+        }
+        menu.remove(idx - 1);
+        System.out.println("Menu item deleted.");
+    }
+    
+    void placeOrder(Scanner scanner) {
         Order order = new Order();
         while (true) {
             displayMenu();
