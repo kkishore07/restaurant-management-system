@@ -169,7 +169,7 @@ class RestaurantManagementSystem {
     void addMenuItem(Scanner sc) {
         System.out.print("Enter new item name: ");
         String name = sc.next();
-        sc.next();
+        sc.nextLine();
         
         System.out.print("Enter price: ");
         double price = sc.nextDouble();
@@ -210,6 +210,7 @@ class RestaurantManagementSystem {
         displayMenu();
         System.out.print("Enter item number to update: ");
         int idx = sc.nextInt();
+        sc.nextLine();
         if (idx < 1 || idx > menu.size()) {
             System.out.println("Invalid item number.");
             return;
@@ -219,6 +220,7 @@ class RestaurantManagementSystem {
         String name = sc.next();
         System.out.print("Enter new price (current: " + item.price + "): ");
         double price = sc.nextDouble();
+        sc.nextLine();
         item.name = name;
         item.price = price;
         System.out.println("Menu item updated.");
