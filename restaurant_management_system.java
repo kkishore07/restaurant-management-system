@@ -169,6 +169,7 @@ class RestaurantManagementSystem {
     void addMenuItem(Scanner sc) {
         System.out.print("Enter new item name: ");
         String name = sc.next();
+        sc.next();
         
         System.out.print("Enter price: ");
         double price = sc.nextDouble();
