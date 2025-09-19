@@ -243,8 +243,9 @@ class RestaurantManagementSystem {
         while (true) {
             displayMenu();
             System.out.print("Enter item number to add to order (0 to finish): ");
-            int itemNum = sc.nextInt();
-            if (itemNum == 0) break;
+                int itemNum = sc.nextInt();
+            
+                if (itemNum == 0) break;
             if (itemNum < 1 || itemNum > menu.size()) {
                 System.out.println("Invalid item number.");
                 continue;
@@ -253,8 +254,19 @@ class RestaurantManagementSystem {
             System.out.println("Item added.");
         }
         if (!order.items.isEmpty()) {
-            orders.add(order);
-            System.out.println("Order placed:\n" + order);
+                
+                System.out.println("\nOrder Summary:");
+                System.out.println(order);
+
+                System.out.print("Confirm order? (y/n): ");
+                sc.nextLine(); 
+                String confirm = sc.nextLine();
+                if (confirm.equalsIgnoreCase("y")) {
+                    orders.add(order);
+                    System.out.println("Order placed successfully!");
+                } else {
+                    System.out.println("Order cancelled.");
+                }
         } else {
             System.out.println("No items ordered.");
         }
