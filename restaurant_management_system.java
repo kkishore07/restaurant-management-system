@@ -8,7 +8,7 @@ public class restaurant_management_system {
        
         Scanner sc = new Scanner(System.in);
         RestaurantManagementSystem rms = new RestaurantManagementSystem();
-        rms.loadMenu("menu.txt");
+        rms.loadMenu("menu.text");
         
         List<User> users = new ArrayList<>();
        
@@ -16,7 +16,7 @@ public class restaurant_management_system {
         users.add(new Customer("customer", ""));
         users.add(new Staff("staff", "staff123"));
 
-        System.out.println("Welcome to Restaurant Management System");
+        System.out.println("Welcome to Our Restaurant");
         System.out.println("Select role:");
         System.out.println("1. Admin");
         System.out.println("2. Customer");
@@ -27,7 +27,7 @@ public class restaurant_management_system {
         User loggedInUser = null;
        
         switch (roleChoice) {
-            case 1 -> {
+            case 1 : {
                 System.out.print("Enter admin username: ");
                 String username = sc.next();
                 System.out.print("Enter admin password: ");
@@ -36,13 +36,15 @@ public class restaurant_management_system {
                 if (username.equals("admin") && password.equals("admin123")) {
                     loggedInUser = new Admin(username, password);
                 }
+                break;
             }
-            case 2 -> {
+            case 2 : {
                 System.out.print("Enter your name: ");
                 String name = sc.next();
-                loggedInUser = new Customer(name,""); // No password needed
+                loggedInUser = new Customer(name,""); 
+                break;
             }
-            case 3 -> {
+            case 3 : {
                 System.out.print("Enter staff username: ");
                 String username = sc.next();
                 System.out.print("Enter staff password: ");
@@ -51,8 +53,10 @@ public class restaurant_management_system {
                 if (username.equals("staff") && password.equals("staff123")) {
                     loggedInUser = new Staff(username, password);
                 }
+                break;
             }
-            default -> System.out.println("Invalid role selection.");
+            default : System.out.println("Invalid role selection.");
+            
         }
 
         if (loggedInUser == null) {
@@ -69,7 +73,7 @@ public class restaurant_management_system {
             System.out.println("\n--- " + loggedInUser.getRole() + " Menu ---");
             switch (loggedInUser.getRole()) {
 
-                case "Admin" -> {
+                case "Admin" : {
                     System.out.println("1. Display Menu");
                     System.out.println("2. Add Menu Item");
                     System.out.println("3. Update Menu Item");
@@ -85,9 +89,10 @@ public class restaurant_management_system {
                     else if (choice == 4) rms.deleteMenuItem(sc);
                     else if (choice == 5) running = false;
                     else System.out.println("Invalid choice.");
+                    break;
                 }
 
-                case "Customer" -> {
+                case "Customer" : {
                     System.out.println("1. Display Menu");
                     System.out.println("2. Place Order");
                     System.out.println("3. View Orders");
@@ -101,9 +106,10 @@ public class restaurant_management_system {
                     else if (choice == 3) rms.viewOrders();
                     else if (choice == 4) running = false;
                     else System.out.println("Invalid choice.");
+                    break;
                 }
 
-                case "Staff" -> {
+                case "Staff" : {
                     System.out.println("1. View Orders");
                     System.out.println("2. Exit");
                     System.out.print("Choose an option: ");
@@ -113,6 +119,7 @@ public class restaurant_management_system {
                     if (choice == 1) rms.viewOrders();
                     else if (choice == 2) running = false;
                     else System.out.println("Invalid choice.");
+                    break;
                 }
             }
         }
@@ -206,50 +213,73 @@ class RestaurantManagementSystem {
     }
     
     void updateMenuItem(Scanner sc) {
+        
         displayMenu();
+        
         System.out.print("Enter item number to update: ");
         int idx = sc.nextInt();
+        
         sc.nextLine();
+        
         if (idx < 1 || idx > menu.size()) {
             System.out.println("Invalid item number.");
             return;
         }
+        
         MenuItem item = menu.get(idx - 1);
+        
         System.out.print("Enter new name (current: " + item.name + "): ");
         String name = sc.next();
+        
         System.out.print("Enter new price (current: " + item.price + "): ");
         double price = sc.nextDouble();
+        
         sc.nextLine();
+        
         item.name = name;
         item.price = price;
+        
         System.out.println("Menu item updated.");
     }
     
     void deleteMenuItem(Scanner sc) {
+        
         displayMenu();
+        
         System.out.print("Enter item number to delete: ");
+        
         int idx = sc.nextInt();
+        
         if (idx < 1 || idx > menu.size()) {
             System.out.println("Invalid item number.");
             return;
         }
+        
         menu.remove(idx - 1);
+        
         System.out.println("Menu item deleted.");
     }
     
     void placeOrder(Scanner sc) {
+       
         Order order = new Order();
+        
         while (true) {
+            
             displayMenu();
+            
             System.out.print("Enter item number to add to order (0 to finish): ");
                 int itemNum = sc.nextInt();
             
                 if (itemNum == 0) break;
-            if (itemNum < 1 || itemNum > menu.size()) {
+            
+                if (itemNum < 1 || itemNum > menu.size()) {
                 System.out.println("Invalid item number.");
                 continue;
             }
+            
             order.addItem(menu.get(itemNum - 1));
+            
             System.out.println("Item added.");
         }
         if (!order.items.isEmpty()) {
