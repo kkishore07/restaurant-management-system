@@ -9,7 +9,6 @@ public class restaurant_management_system {
         Scanner sc = new Scanner(System.in);
         RestaurantManagementSystem rms = new RestaurantManagementSystem();
         rms.loadMenu("menu.txt");
-
         
         List<User> users = new ArrayList<>();
        
